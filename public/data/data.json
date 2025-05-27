@@ -1,0 +1,34 @@
+[
+    {
+        "id": 1,
+        "nombre": "Cupcakes de vainilla con crema de blueberries",
+        "stock":"10",
+        "precio":" 15000",
+        "url": "/assets/imagenes/img1.jpg",
+        "descripcion": "Esponjosos mini bizcochos de vainilla decorados con una cremosa cobertura de arándanos, ideales para una presentación delicada y sabrosa."
+    },
+    {
+        "id": 2,
+        "nombre": "Torta de crema y frutos rojos",
+        "url": "/assets/imagenes/img2.jpg",
+        "stock":"10",
+        "precio":" 15000",
+        "descripcion":"Base crocante rellena con suave crema pastelera y cubierta con una colorida variedad de frutos rojos frescos."
+    },
+    {
+        "id": 3,
+        "nombre": "Crema de limon y merengue",
+        "url": "/assets/imagenes/img3.jpg",
+        "stock":"10",
+        "precio":" 15000",
+        "descripcion":" Clásica combinación de masa quebrada, relleno cítrico y un generoso copete de merengue. Equilibrio perfecto entre dulce y ácido."
+    },
+    {
+        "id": 4,
+        "nombre": "Torta helada tres sabores",
+        "url": "/assets/imagenes/torta1.jpg",
+        "stock":"10",
+        "precio":" 15000",
+        "descripcion":"Postre frío en capas de chocolate, frutilla y vainilla, con textura cremosa y refrescante. Ideal para los días calurosos "
+    }
+]
