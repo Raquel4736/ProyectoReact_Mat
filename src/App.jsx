@@ -1,5 +1,5 @@
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import './App.css'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Home from './pages/Home'
@@ -12,83 +12,30 @@ import Login from './pages/Login'
 import RutasProtegidas from './auth/RutasProtegidas'
 import Admin from './pages/Admin'
 import DetallesProductos from './components/DetallesProductos'
+import { CartContext } from './components/context/CartContext'
+
 
 
 
 
 function App() {
-
-  const [cart, setCart] = useState([])
-  const [producto, setProductos] = useState([])
-  const [cargando, setCargando] = useState(true)
-  const [error, setError] = useState(false)
-  const [isAuthenticated,setIsAuth] = useState(false)
-
-  useEffect(() => {
-    fetch('/data/data.json')
-      .then(respuesta => respuesta.json())
-      .then(datos => {
-        setTimeout(() => {
-          setProductos(datos)
-          setCargando(false)
-        }, 2000)
-      })
-      .catch(error => {
-        console.log('Error', error)
-        setCargando(false)
-        setError(true)
-      })
-
-  }, [])
-
-  const handleAddToCart = (producto, cantidad) => {
-  const productInCart = cart.find((item) => item.id === producto.id);
-
-  if (productInCart) {
-    setCart(
-      cart.map((item) =>
-        item.id === producto.id
-          ? { ...item, quantity: item.quantity + cantidad }
-          : item
-      )
-    );
-  } else {
-    setCart([...cart, { ...producto, quantity: cantidad }]); 
-  }
-};
-
-
-  const handleDeleteFromCart = (producto) => {
-    setCart(prevCart => {
-      return prevCart.map(item => {
-        if (item.id === producto.id) {
-          if (item.quantity > 1) {
-            return { ...item, quantity: item.quantity - 1 };
-          } else {
-            return null;
-          }
-        } else {
-          return item; 
-        }
-      }).filter(item => item !== null); 
-    });
-  };
+const {cart, producto,cargando,error,handleAddToCart,handleDeleteFromCart,isAuthenticated} =useContext(CartContext)
 
 
 
   return (
-    <Router>
+  
       <Routes>
 
-        <Route path='/' element={<Home borrarProducto={handleDeleteFromCart} agregarCarrito={handleAddToCart} cart={cart} producto={producto}  />} />
+        <Route path='/' element={<Home/>} />
 
-        <Route path='/acercade' element={<AcercaDe borrarProducto={handleDeleteFromCart} cart={cart} />} />
+        <Route path='/acercade' element={<AcercaDe />} />
 
-        <Route path='/products' element={<GaleriaDeProductos borrarProducto={handleDeleteFromCart} agregarCarrito={handleAddToCart} cart={cart} producto={producto}  />} />
+        <Route path='/products' element={<GaleriaDeProductos />} />
 
-        <Route path='/products/:id' element={<DetallesProductos producto={producto}/>}/>
+        <Route path='/products/:id' element={<DetallesProductos />}/>
 
-        <Route path='/contactos' element={<Contactos borrarProducto={handleDeleteFromCart} cart={cart} />} />
+        <Route path='/contactos' element={<Contactos/>} />
 
         <Route path='/admin' element={ <RutasProtegidas isAuthenticated={isAuthenticated}><Admin/></RutasProtegidas>}/>
 
@@ -98,7 +45,7 @@ function App() {
 
       </Routes>
 
-    </Router>
+  
   )
 }
 

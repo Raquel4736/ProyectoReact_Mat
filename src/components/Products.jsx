@@ -1,9 +1,12 @@
 
-import React, { useState } from 'react';
+import React, { useState,useContext } from 'react';
 import '../components/styleProducts.css';
 import { Link } from 'react-router-dom';
+import { CartContext } from './context/CartContext';
 
-function Products({ producto, agregarCarrito }) {
+
+function Products({producto }) {
+    const { handleAddToCart} =useContext (CartContext)
     const [cantidad, setCantidad] = useState(1);
     const [stockDisponible, setStockDisponible] = useState(producto.stock);
 
@@ -12,7 +15,7 @@ function Products({ producto, agregarCarrito }) {
 
     const handleAgregar = () => {
         if (stockDisponible >= cantidad) {
-            agregarCarrito(producto, cantidad);
+            handleAddToCart(producto, cantidad);
             setStockDisponible(stockDisponible - cantidad);
             setCantidad(1); 
     };
@@ -46,6 +49,7 @@ function Products({ producto, agregarCarrito }) {
             </button>
 
             <Link to={`/products/${producto.id}`}>Ver Más</Link>
+        
         </section>
     );
 }

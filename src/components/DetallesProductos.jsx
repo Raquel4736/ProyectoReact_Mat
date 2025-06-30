@@ -1,9 +1,11 @@
-import React from 'react'
+import React ,{useContext}from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
+import { CartContext } from './context/CartContext'
 
-function DetallesProductos({ producto }) {
+function DetallesProductos() {
     const { id } = useParams()
-    const pro = producto.find(produ => produ.id == id)
+    const { producto } = useContext(CartContext) 
+    const pro = producto.find (produ => produ.id == id)
     const navigate = useNavigate()
     const handleVolver = () => {
         navigate('/products')

@@ -6,13 +6,11 @@
 }
 
   body{
-  background-color: wheat;
+  background-color:  rgb(236, 214, 201)   !important;
 
   }
 
-.titulo{
-font-family: "Playwrite US Trad", cursive;
-}
+
 .titulo1{
   font-size: 30px;
 }
@@ -55,4 +53,8 @@ font-family: "Playwrite US Trad", cursive;
 
 .read-the-docs {
   color: #888;
+}
+.link.active{
+  color: blue;
+  font-weight: bold;
 }

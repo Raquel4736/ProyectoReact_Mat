@@ -3,11 +3,11 @@ import Header from '../components/estaticos/Header'
 import Footer from '../components/estaticos/Footer'
 import imagen from '../assets/img4.jpg'
 
-function Acercade({ cart }) {
+function Acercade() {
     return (
         <>
-            <Header cartItems={cart} />
-            <h1>Quienes somos</h1>
+            <Header />
+            <h1 style={{padding:"30px"}}>Quienes somos</h1>
             <section className="somos">
                 <div>
                     En Mat, nos apasiona el arte de la pastelería artesanal. Cada creación que sale de nuestro horno está hecha con dedicación, utilizando las mejores materias primas para garantizar una experiencia deliciosa en cada bocado. Creemos que la calidad empieza desde los ingredientes, por eso seleccionamos cuidadosamente productos frescos, locales y naturales, sin conservantes ni aditivos artificiales.

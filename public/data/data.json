@@ -2,9 +2,10 @@
     {
         "id": 1,
         "nombre": "Cupcakes de vainilla con crema de blueberries",
+        "url": "/assets/imagenes/img1.jpg",
         "stock":"10",
         "precio":" 15000",
-        "url": "/assets/imagenes/img1.jpg",
+    
         "descripcion": "Esponjosos mini bizcochos de vainilla decorados con una cremosa cobertura de arándanos, ideales para una presentación delicada y sabrosa."
     },
     {
@@ -30,5 +31,36 @@
         "stock":"10",
         "precio":" 15000",
         "descripcion":"Postre frío en capas de chocolate, frutilla y vainilla, con textura cremosa y refrescante. Ideal para los días calurosos "
+    },
+    {
+        "id": 5,
+        "nombre": "Bombones de frutas y chocolate",
+        "url": "/assets/imagenes/img4.jpg",
+        "stock":"10",
+        "precio":" 15000",
+        "descripcion":" Pequeñas delicias artesanales: bombones rellenos con frutas naturales y bañados en el mejor chocolate semi amargo o con leche. Frutilla, cereza, frambuesa, naranja... un bocado fresco y tentador para cualquier momento del día. Ideales para regalar o para acompañar un café. "
+    },
+    {
+        "id": 6,
+        "nombre": "Tortas de Casamiento",
+        "url": "/assets/imagenes/casamiento.jpg",
+        "stock":"10",
+        "precio":" 15000",
+        "descripcion":"Celebrá el amor con una torta de casamiento única, elegante y personalizada. Decoradas con detalles delicados y sabores a elección (vainilla, chocolate, frutos rojos, crema, entre otros). Hechas con ingredientes frescos y pensadas para que ese día sea inolvidable. Consultanos por modelos y tamaños. "
+    },
+    {
+        "id": 7,
+        "nombre": "Torta de crema,chocolate y frutos rojos",
+        "url": "/assets/imagenes/crema.jpg",
+        "stock":"10",
+        "precio":" 15000",
+        "descripcion":" Una combinación perfecta: bizcochuelo húmedo, capas de crema suave y ganache de chocolate, coronada con una generosa mezcla de frutos rojos frescos. Un postre elegante, intenso y equilibrado, ideal para sorprender."
+    },  {
+        "id": 8,
+        "nombre": "Tarta de frutillas",
+        "url": "/assets/imagenes/tarta.jpg",
+        "stock":"10",
+        "precio":" 15000",
+        "descripcion":"Una clásica irresistible: base crocante, crema pastelera suave y frutillas frescas seleccionadas. Ideal para postres, reuniones o simplemente para darte un gusto. Fresca, liviana y deliciosa. "
     }
 ]

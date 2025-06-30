@@ -1,31 +1,19 @@
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
-
+import FormularioProducto from "../components/FormularioProducto";
+import FormularioEdicion from "../components/FormularioEdicion";
+import { CartContext } from "../components/context/CartContext";
+import { useNavigate } from "react-router-dom";
+import { Admincontext } from "../components/context/AdminContext";
+import '../components/styleProducts.css';
 const Admin = () => {
-    const [productos, setProductos] = useState([]);
-    const [form, setForm] = useState({ id: null, name: "", price: "" });
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(false);
+    const { setIsAuth } = useContext(CartContext)
+    const navigate = useNavigate()
 
 
-
-    useEffect(() => {
-        fetch("/data/data.json")
-            .then((response) => response.json())
-            .then((data) => {
-                setTimeout(() => {
-                    setProductos(data);
-                    setLoading(false);
-                }, 2000);
-            })
-            .catch((error) => {
-                console.error("Error fetching data:", error);
-                setError(true);
-                setLoading(false);
-            });
-    }, []);
-
+    const { producto, loading, open, setOpen, openEditor, setOpenEditor, seleccionado, setSeleccionado,
+        agregarProducto, actualizarProducto, eliminarProducto } = useContext(Admincontext)
     return (
         <div className="container">
             {loading ? (
@@ -35,58 +23,126 @@ const Admin = () => {
                     <nav>
                         <ul className="nav">
                             <li className="navItem">
-                                <button className="navButton">
+                                <button className="navButton" onClick={() => {
+                                    setIsAuth(false)
+                                    localStorage.removeItem('isAuth');
+                                    navigate('/')
+                                }}>
                                     <i className="fa-solid fa-right-from-bracket"></i>
                                 </button>
                             </li>
-                            <li className="navItem">
-                                
-                                <Link to="/admin">Admin</Link>
+                            <li className="navItem" style={{
+                                color: "blue",
+                                backgroundColor: "lightgray",
+                                padding: "10px",
+                                borderRadius: "5px",
+                                minWidth: "100px",
+                                cursor: "pointer"
+                            }}>
+                                <Link to="/">Volver al inicio</Link>
                             </li>
+
                         </ul>
                     </nav>
                     <h1 className="title">Panel Administrativo</h1>
-                    <form className="form">
-                        <input
-                            type="text"
-                            name="name"
-                            placeholder="Nombre del producto"
-                            className="input"
-                            required
-                        />
-                        <input
-                            type="number"
-                            name="price"
-                            placeholder="Precio del producto"
-                            className="input"
-                            required
-                        />
-                        <button type="submit" className="button">
-                            {form.id ? "Editar" : "Crear"}
-                        </button>
-                    </form>
-                    <ul className="list">
-                        {productos.map((producto) => (
-                            <li key={producto.id} className="listItem">
-                                <img
-                                    src={producto.imagen}
-                                    alt={producto.nombre}
-                                    className="listItemImage"
-                                />
-                                <span>{producto.nombre}</span>
-                                <span>${producto.precio}</span>
-                                <div>
-                                    <button className="editButton">Editar</button>
+                    <ul className="list productos-grid">
 
-                                    <button className="deleteButton">Eliminar</button>
+                        {producto.map((producto) => (
+                            <li key={producto.id} className="listItem" >
+
+                        
+                                <div className="card" style={{ width: "100%" }}>
+                                    <img
+                                        src={producto.url}
+                                        alt=""
+                                        className="imagen"
+                                    />
+
+
+                                    <div className="card-body">
+                                        <span className="card-text">{producto.nombre}</span>
+                                    </div>
+                                    <div className="card-body">
+
+                                        <span className="card-text"> $ {producto.precio}</span>
+                                    </div>
+                                    <div style={{ display: "flex", justifyContent: "center", gap: "10px", marginTop: "10px", flexWrap: "wrap" }}>
+                                        <button
+                                            style={{
+                                                color: "blue",
+                                                backgroundColor: "lightgray",
+                                                padding: "10px",
+                                                borderRadius: "5px",
+                                                minWidth: "100px"
+                                            }}
+                                            className="editButton"
+                                            onClick={() => {
+                                                setOpenEditor(true);
+                                                setSeleccionado(producto);
+                                            }}
+                                        >
+                                            Editar
+                                        </button>
+
+                                        <button
+                                            className="deleteButton"
+                                            style={{
+                                                color: "blue",
+                                                backgroundColor: "lightgray",
+                                                padding: "10px",
+                                                borderRadius: "5px",
+                                                minWidth: "100px"
+                                            }}
+                                            onClick={() => eliminarProducto(producto.id)}
+                                        >
+                                            Eliminar
+                                        </button>
+                                    </div>
+
+
                                 </div>
                             </li>
                         ))}
                     </ul>
+
+
+
                 </>
-            )}
-        </div>
-    );
-};
+            )
+            }
+            <button onClick={() => setOpen(true)}>Agregar producto nuevo</button>
+
+            {open && <div className="overlay" onClick={() => setOpen(false)} />}
+
+            <div className={`sidebar ${open ? "open" : ""}`}>
+                <FormularioProducto
+                    onAgregar={(nuevoProducto) => {
+                        agregarProducto(nuevoProducto);
+                        setOpen(false);
+                    }}
+                    onClose={() => setOpen(false)}
+                />
+            </div>
+            {openEditor && <div className="overlay" onClick={() => setOpenEditor(false)} />}
+
+            <div className={`sidebar ${openEditor ? "open" : ""}`}>
+                {openEditor && (
+                    <FormularioEdicion
+                        productoSeleccionado={seleccionado}
+                        onActualizar={(productoActualizado) => {
+                            actualizarProducto(productoActualizado);
+                            setOpenEditor(false);
+                        }}
+                        onClose={() => setOpenEditor(false)}
+                    />
+                )}
+            </div>
+        </div >
+
+
+
+    )
+
+}
 
 export default Admin;

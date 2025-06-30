@@ -4,11 +4,11 @@ import Footer from '../components/estaticos/Footer'
 import Formulario from '../components/Formulario'
 import { Link } from 'react-router-dom'
 
-function Contactos({cart}) {
+function Contactos() {
     return (
         <>
-        <Header cartItems={cart}/>
-            <h1>Contactos</h1>
+        <Header/>
+            <h1 style={{padding:"20px"}}>Contactos</h1>
         <Formulario/>
         <Footer/>
         </>
